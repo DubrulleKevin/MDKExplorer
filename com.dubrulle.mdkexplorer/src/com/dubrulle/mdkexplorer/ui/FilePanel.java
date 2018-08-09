@@ -13,13 +13,13 @@ import javax.swing.JPanel;
 public class FilePanel extends JPanel {
 		
 	private BufferedImage fileIcon;
-	private int iconSize;
+	private IconSize iconSize;
 	private FileNameTextArea textArea;
 	private IconType iconType;
 	private boolean selected = false;
 	private FilesPanel parent;
 
-	public FilePanel(final FilesPanel parent, final String fileName, final int iconSize, final IconType iconType) {	
+	public FilePanel(final FilesPanel parent, final String fileName, final IconSize iconSize, final IconType iconType) {	
 		this.iconType = iconType;
 		this.parent = parent;
 		
@@ -27,7 +27,7 @@ public class FilePanel extends JPanel {
 		
 		setIconSize(iconSize);
 		
-		textArea = new FileNameTextArea(this, fileName, iconSize);
+		textArea = new FileNameTextArea(this, fileName, iconSize.getValue());
 		relocateTextArea();
 		add(textArea);
 		
@@ -77,45 +77,38 @@ public class FilePanel extends JPanel {
 		System.out.println("Double click on icon");
 	}
 	
-	private void loadIcon() {
+	private void resizeIcon() {
 		switch (iconType) {
 		case FILE:
-			fileIcon = ResourcesManager.getInstance().getFileIcon();
+			fileIcon = ResourcesManager.getInstance().getFileIcon(iconSize);
 			break;
 		case FOLDER:
-			fileIcon = ResourcesManager.getInstance().getFolderIcon();
+			fileIcon = ResourcesManager.getInstance().getFolderIcon(iconSize);
+			break;
 		}
 	}
 	
-	private void loadAndResizeIcon() {
-		loadIcon();
-		
-		Image scaledImage = fileIcon.getScaledInstance(iconSize, iconSize, BufferedImage.SCALE_DEFAULT);
-		fileIcon = new BufferedImage(iconSize, iconSize, fileIcon.getType());
-		fileIcon.getGraphics().drawImage(scaledImage, 0, 0, null);
-	}
-	
 	private void relocateTextArea() {
-		textArea.setLocation(0, (int)(1.1 * iconSize));
+		textArea.setLocation(0, (int)(1.1 * iconSize.getValue()));
 	}
 	
 	private void resize() {
-		setSize(iconSize * 2, iconSize * 2);
+		setSize(iconSize.getValue() * 2, iconSize.getValue() * 2);
 	}
 	
-	public void setIconSize(final int iconSize) {
-		this.iconSize = iconSize;
-		loadAndResizeIcon();
+	public void setIconSize(final IconSize size) {
+		this.iconSize = size;
+		resizeIcon();
 		resize();
 	}
 	
 	public void paintComponent(Graphics g) {
 		if (fileIcon != null) {
 			if (selected) {
-				g.drawImage(fileIcon, iconSize / 2, 0, Color.BLUE ,null);
+				g.drawImage(fileIcon, iconSize.getValue() / 2, 0, Color.BLUE ,null);
 			}
 			else {
-				g.drawImage(fileIcon, iconSize / 2, 0 ,null);
+				g.drawImage(fileIcon, iconSize.getValue() / 2, 0 ,null);
 			}
 		}
 	}

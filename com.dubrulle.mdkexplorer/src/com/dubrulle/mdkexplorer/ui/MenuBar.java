@@ -20,17 +20,17 @@ public class MenuBar extends JMenuBar {
 		
 		JMenuItem smallItem = new JMenuItem("Default icons");
 		smallItem.addActionListener(l -> {
-			frame.setFilesIconSize(48);
+			frame.setFilesIconSize(IconSize.DEFAULT);
 		});
 		
 		JMenuItem defaultItem = new JMenuItem("Tall icons");
 		defaultItem.addActionListener(l -> {
-			frame.setFilesIconSize(64);
+			frame.setFilesIconSize(IconSize.TALL);
 		});
 		
 		JMenuItem bigItem = new JMenuItem("Big icons");
 		bigItem.addActionListener(l -> {
-			frame.setFilesIconSize(80);
+			frame.setFilesIconSize(IconSize.BIG);
 		});
 		
 		JMenu viewMenu = new JMenu("View");

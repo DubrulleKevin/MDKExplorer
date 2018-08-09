@@ -19,6 +19,7 @@ public class FileNameTextArea extends JTextArea {
 		setSize(iconSize * 2, iconSize);
 		setLineWrap(true);
 		setWrapStyleWord(true);
+		setCaretColor(Color.BLACK);
 		
 		unSelect();
 		

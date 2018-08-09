@@ -2,15 +2,19 @@ package com.dubrulle.mdkexplorer.ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import com.dubrulle.mdkexplorer.model.IFSProvider;
+import com.dubrulle.mdkexplorer.model.LocalFSProvider;
+
 @SuppressWarnings("serial")
 public class FilesPanel extends JPanel {
 	
-	private int iconSize = 48;	
+	private IconSize iconSize = IconSize.DEFAULT;	
 	private List<FilePanel> filePanels;
 	
 	public FilesPanel() {
@@ -18,16 +22,18 @@ public class FilesPanel extends JPanel {
 		
 		filePanels = new ArrayList<>();
 		
-		filePanels.add(new FilePanel(this, "1", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "2", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "3", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "4", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "5", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "6", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "7", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "8", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "9", iconSize, IconType.FOLDER));
-		filePanels.add(new FilePanel(this, "10", iconSize, IconType.FOLDER));
+		IFSProvider fsProvider = LocalFSProvider.getInstance();
+		
+		File[] files = fsProvider.listFiles("/etc");
+		
+		for (File file : files) {
+			if (file.isDirectory()) {
+				filePanels.add(new FilePanel(this, file.getName(), iconSize, IconType.FOLDER));
+			}
+			else {
+				filePanels.add(new FilePanel(this, file.getName(), iconSize, IconType.FILE));
+			}
+		}
 		
 		for (FilePanel filePanel : filePanels) {
 			add(filePanel);
@@ -72,11 +78,11 @@ public class FilesPanel extends JPanel {
 		repaint();
 	}
 	
-	public int getIconSize() {
+	public final IconSize getIconSize() {
 		return iconSize;
 	}
 	
-	public void setIconSize(final int iconSize) {
+	public void setIconSize(final IconSize iconSize) {
 		this.iconSize = iconSize;
 		
 		for (FilePanel filePanel : filePanels) {

@@ -56,7 +56,7 @@ public class FilesPanelLayoutManager implements LayoutManager {
 			
 		});
 		
-		int iconSize = ((FilesPanel)parent).getIconSize();
+		int iconSize = ((FilesPanel)parent).getIconSize().getValue();
 		Dimension componentsSize = new Dimension(iconSize, iconSize);
 		Dimension parentSize = parent.getSize();
 		
