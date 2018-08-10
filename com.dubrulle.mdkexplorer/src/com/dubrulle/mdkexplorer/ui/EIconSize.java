@@ -1,6 +1,6 @@
 package com.dubrulle.mdkexplorer.ui;
 
-public enum IconSize {
+public enum EIconSize {
 	
 	DEFAULT(48),
 	TALL(64),
@@ -8,7 +8,7 @@ public enum IconSize {
 	
 	private final int id;
 	
-	IconSize(final int id) {
+	EIconSize(final int id) {
 		this.id = id;
 	}
 	

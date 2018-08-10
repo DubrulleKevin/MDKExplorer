@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JTextArea;
 
+import com.dubrulle.mdkexplorer.config.Config;
+
 @SuppressWarnings("serial")
 public class FileNameTextArea extends JTextArea {
 	
@@ -62,7 +64,6 @@ public class FileNameTextArea extends JTextArea {
 	
 	public void select() {
 		setEditable(true);
-		setBackground(Color.WHITE);
 		setSelectionColor(Color.BLACK);
 		setSelectionStart(0);
 		setSelectionEnd(getText().length());
@@ -70,8 +71,8 @@ public class FileNameTextArea extends JTextArea {
 	
 	public void unSelect() {
 		setEditable(false);
-		setBackground(parent.getBackground());
-		setSelectionColor(parent.getBackground());
+		setBackground(Config.getBackgroundColor());
+		setSelectionColor(Config.getBackgroundColor());
 	}
 	
 }

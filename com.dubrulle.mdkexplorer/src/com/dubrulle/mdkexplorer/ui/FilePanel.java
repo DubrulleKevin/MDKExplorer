@@ -2,26 +2,29 @@ package com.dubrulle.mdkexplorer.ui;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import com.dubrulle.mdkexplorer.config.Config;
+
 @SuppressWarnings("serial")
 public class FilePanel extends JPanel {
 		
 	private BufferedImage fileIcon;
-	private IconSize iconSize;
+	private EIconSize iconSize;
 	private FileNameTextArea textArea;
-	private IconType iconType;
+	private EIconType iconType;
 	private boolean selected = false;
 	private FilesPanel parent;
 
-	public FilePanel(final FilesPanel parent, final String fileName, final IconSize iconSize, final IconType iconType) {	
+	public FilePanel(final FilesPanel parent, final String fileName, final EIconSize iconSize, final EIconType iconType) {	
 		this.iconType = iconType;
 		this.parent = parent;
+		
+		setBackground(Config.getBackgroundColor());
 		
 		setLayout(null);
 		
@@ -96,7 +99,7 @@ public class FilePanel extends JPanel {
 		setSize(iconSize.getValue() * 2, iconSize.getValue() * 2);
 	}
 	
-	public void setIconSize(final IconSize size) {
+	public void setIconSize(final EIconSize size) {
 		this.iconSize = size;
 		resizeIcon();
 		resize();

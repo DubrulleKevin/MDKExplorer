@@ -1,6 +1,6 @@
 package com.dubrulle.mdkexplorer.ui;
 
-public enum IconType {
+public enum EIconType {
 	FILE,
 	FOLDER
 }

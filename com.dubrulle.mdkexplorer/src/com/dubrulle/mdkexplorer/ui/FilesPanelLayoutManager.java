@@ -9,6 +9,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class FilesPanelLayoutManager implements LayoutManager {
+	
+	private int scroll;
+	
+	public void setScroll(int scroll) {
+		this.scroll = scroll;
+	}
 
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
@@ -67,7 +73,7 @@ public class FilesPanelLayoutManager implements LayoutManager {
 			for (int i = 0; i < components.length; i++) {
 				components[i].setLocation(
 					componentsSize.width * 2 * (i % componentsNumberOnX),
-					componentsSize.height * 2 *(i / componentsNumberOnX)
+					componentsSize.height * 2 *(i / componentsNumberOnX) - scroll
 				);
 			}
 		}

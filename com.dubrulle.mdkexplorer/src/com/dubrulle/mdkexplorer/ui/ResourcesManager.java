@@ -66,7 +66,7 @@ public class ResourcesManager {
 		return fileIconOriginal;
 	}
 	
-	public final BufferedImage getFolderIcon(IconSize size) {
+	public final BufferedImage getFolderIcon(EIconSize size) {
 		BufferedImage ret = null;
 		
 		switch (size) {
@@ -99,7 +99,7 @@ public class ResourcesManager {
 		return ret;
 	}
 	
-	public final BufferedImage getFileIcon(IconSize size) {
+	public final BufferedImage getFileIcon(EIconSize size) {
 		BufferedImage ret = null;
 		
 		switch (size) {
