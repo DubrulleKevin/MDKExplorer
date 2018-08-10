@@ -10,13 +10,9 @@ import com.dubrulle.mdkexplorer.config.Config;
 
 @SuppressWarnings("serial")
 public class FileNameTextArea extends JTextArea {
-	
-	private FilePanel parent;
 
 	public FileNameTextArea(final FilePanel parent, final String fileName, final int iconSize) {
 		super(fileName);
-		
-		this.parent = parent;
 		
 		setSize(iconSize * 2, iconSize);
 		setLineWrap(true);

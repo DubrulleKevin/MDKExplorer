@@ -32,8 +32,8 @@ public class MainFrame extends JFrame {
 		setJMenuBar(new MenuBar(this));
 	}
 	
-	public void setFilesIconSize(final EIconSize iconSize) {
-		filesPanel.setIconSize(iconSize);
+	public final FilesPanel getFilesPanel() {
+		return filesPanel;
 	}
 	
 }

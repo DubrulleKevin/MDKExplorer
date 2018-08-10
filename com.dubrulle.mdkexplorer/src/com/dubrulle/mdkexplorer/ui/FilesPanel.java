@@ -22,7 +22,8 @@ import com.dubrulle.mdkexplorer.model.LocalFSProvider;
 @SuppressWarnings("serial")
 public class FilesPanel extends JPanel {
 	
-	private EIconSize iconSize = EIconSize.DEFAULT;	
+	private EIconSize iconSize = EIconSize.DEFAULT;
+	private boolean sortFoldersFirst = true;
 	private List<FilePanel> filePanels;
 	private FilesPanelLayoutManager layout;
 	private JScrollBar parentScrollBar;
@@ -33,6 +34,7 @@ public class FilesPanel extends JPanel {
 		setBackground(Config.getBackgroundColor());
 		
 		layout = new FilesPanelLayoutManager();
+		layout.setSortFoldersFirst(getSortFoldersFirst());
 		setLayout(layout);
 		
 		filePanels = new ArrayList<>();
@@ -171,6 +173,16 @@ public class FilesPanel extends JPanel {
 		
 		parentScrollBar.setMaximum(getRowsNumber() / getMaxRowsNumber());
 		
+		revalidate();
+	}
+	
+	public final boolean getSortFoldersFirst() {
+		return sortFoldersFirst;
+	}
+	
+	public void setSortFoldersFirst(final boolean b) {
+		sortFoldersFirst = b;
+		layout.setSortFoldersFirst(b);
 		revalidate();
 	}
 

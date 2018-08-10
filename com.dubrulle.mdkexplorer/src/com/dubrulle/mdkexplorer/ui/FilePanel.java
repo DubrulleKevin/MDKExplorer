@@ -135,4 +135,8 @@ public class FilePanel extends JPanel {
 		return textArea.getText();
 	}
 	
+	public final EIconType getIconType() {
+		return iconType;
+	}
+	
 }

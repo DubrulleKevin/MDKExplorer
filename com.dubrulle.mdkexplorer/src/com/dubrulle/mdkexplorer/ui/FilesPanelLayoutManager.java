@@ -5,15 +5,22 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public class FilesPanelLayoutManager implements LayoutManager {
 	
 	private int scroll;
+	private boolean sortFoldersFirst;
 	
 	public void setScroll(int scroll) {
 		this.scroll = scroll;
+	}
+	
+	public void setSortFoldersFirst(final boolean b) {
+		sortFoldersFirst = b;
 	}
 
 	@Override
@@ -51,16 +58,54 @@ public class FilesPanelLayoutManager implements LayoutManager {
 	@Override
 	public void layoutContainer(Container parent) {
 		Component[] components = parent.getComponents();
-		
-		Arrays.sort(components, new Comparator<Component>() {
-
-			@Override
-			public int compare(Component o1, Component o2) {
-				// Alphabetical order
-				return o1.toString().compareTo(o2.toString());
+				
+		if (sortFoldersFirst) {
+			List<Component> foldersComponents = new ArrayList<>();
+			List<Component> filesComponents = new ArrayList<>();
+			
+			for (Component component : components) {
+				if (((FilePanel)component).getIconType() == EIconType.FOLDER) {
+					foldersComponents.add(component);
+				}
+				else {
+					filesComponents.add(component);
+				}
 			}
 			
-		});
+			foldersComponents.sort(new Comparator<Component>() {
+	
+				@Override
+				public int compare(Component o1, Component o2) {
+					// Alphabetical order
+					return o1.toString().compareTo(o2.toString());
+				}
+				
+			});
+			
+			filesComponents.sort(new Comparator<Component>() {
+	
+				@Override
+				public int compare(Component o1, Component o2) {
+					// Alphabetical order
+					return o1.toString().compareTo(o2.toString());
+				}
+				
+			});
+			
+			foldersComponents.addAll(filesComponents);
+			components = foldersComponents.toArray(new Component[0]);
+		}
+		else {
+			Arrays.sort(components, new Comparator<Component>() {
+	
+				@Override
+				public int compare(Component o1, Component o2) {
+					// Alphabetical order
+					return o1.toString().compareTo(o2.toString());
+				}
+				
+			});
+		}
 		
 		int iconSize = ((FilesPanel)parent).getIconSize().getValue();
 		Dimension componentsSize = new Dimension(iconSize, iconSize);
