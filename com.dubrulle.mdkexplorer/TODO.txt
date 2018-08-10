@@ -1,3 +1,4 @@
 -> Be able to dive into filesystem
 -> Be able to open a file with the xdg default app
 -> Be able to open a file with a custom app
+-> Sort with case insensitive
