@@ -67,8 +67,8 @@ public class FileNameTextArea extends JTextArea {
 	
 	public void unSelect() {
 		setEditable(false);
-		setBackground(Config.getBackgroundColor());
-		setSelectionColor(Config.getBackgroundColor());
+		setBackground(Config.getInstance().getBackgroundColor());
+		setSelectionColor(Config.getInstance().getBackgroundColor());
 	}
 	
 }

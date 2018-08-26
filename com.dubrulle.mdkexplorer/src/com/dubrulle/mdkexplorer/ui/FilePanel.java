@@ -24,7 +24,7 @@ public class FilePanel extends JPanel {
 		this.iconType = iconType;
 		this.parent = parent;
 		
-		setBackground(Config.getBackgroundColor());
+		setBackground(Config.getInstance().getBackgroundColor());
 		
 		setLayout(null);
 		

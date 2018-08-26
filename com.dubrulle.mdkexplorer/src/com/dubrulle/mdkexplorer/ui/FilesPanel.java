@@ -31,7 +31,7 @@ public class FilesPanel extends JPanel {
 	public FilesPanel(JScrollBar parentScrollBar) {
 		this.parentScrollBar = parentScrollBar;
 		
-		setBackground(Config.getBackgroundColor());
+		setBackground(Config.getInstance().getBackgroundColor());
 		
 		layout = new FilesPanelLayoutManager();
 		layout.setSortFoldersFirst(getSortFoldersFirst());
@@ -111,7 +111,11 @@ public class FilesPanel extends JPanel {
 			
 			@Override
 			public void componentResized(ComponentEvent e) {
-				parentScrollBar.setMaximum(getRowsNumber() / getMaxRowsNumber());
+				int maxRowsNumber = getMaxRowsNumber();
+				
+				if (maxRowsNumber != 0) {
+					parentScrollBar.setMaximum(getRowsNumber() / getMaxRowsNumber());
+				}	
 			}
 			
 			@Override
@@ -168,7 +172,7 @@ public class FilesPanel extends JPanel {
 		this.iconSize = iconSize;
 		
 		for (FilePanel filePanel : filePanels) {
-			filePanel.setIconSize(iconSize);;
+			filePanel.setIconSize(iconSize);
 		}
 		
 		parentScrollBar.setMaximum(getRowsNumber() / getMaxRowsNumber());

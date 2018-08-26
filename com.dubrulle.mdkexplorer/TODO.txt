@@ -3,3 +3,4 @@
 -> Be able to open a file with a custom app
 -> Sort with case insensitive
 -> Decide if this software should be portable on Windows and OSX, or XDG compliant only
+-> Be able to configure the software through a file in the good XDG folder.
